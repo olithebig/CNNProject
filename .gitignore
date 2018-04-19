@@ -1,2 +1,3 @@
-glass-model.*
-checkpoint
+/glass-model.*
+/checkpoint
+/.idea/
