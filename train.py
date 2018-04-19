@@ -1,38 +1,36 @@
-import dataset
 import tensorflow as tf
-import time
-from datetime import timedelta
-import math
-import random
-import numpy as np
-
 # Adding Seed so that random initialization is consistent
 from numpy.random import seed
-
-seed(1)
 from tensorflow import set_random_seed
 
+import dataset
+
+seed(1)
 set_random_seed(2)
 
 batch_size = 5
+iterations = 300
 
-# Prepare input data
-classes = ['glass6', 'glass5', 'glass4', 'glass3', 'glass2', 'glass1']
+# Labels of training images
+classes = ['glass1', 'glass2', 'glass3', 'glass4', 'glass5', 'glass6']
 num_classes = len(classes)
 
 # 20% of the data will automatically be used for validation
 validation_size = 0.2
-# img_size = 128
+# img parameters
 img_size = 128
 num_channels = 3
+# location of training images
 train_path = 'training_data'
 
-# We shall load all the training and validation images and labels into memory using openCV and use that during training
+# loading training and validation images as well as respective labels
 data = dataset.read_train_sets(train_path, img_size, classes, validation_size=validation_size)
 
+print()
 print("Complete reading input data. Will Now print a snippet of it")
-print("Number of files in Training-set:\t\t{}".format(len(data.train.labels)))
-print("Number of files in Validation-set:\t{}".format(len(data.valid.labels)))
+print("Number of files in Training-set  : {}".format(len(data.train.labels)))
+print("Number of files in Validation-set: {}".format(len(data.valid.labels)))
+print()
 
 session = tf.Session()
 x = tf.placeholder(tf.float32, shape=[None, img_size, img_size, num_channels], name='x')
@@ -43,7 +41,6 @@ y_true_cls = tf.argmax(y_true, dimension=1)
 
 # Network graph params
 filter_size_conv1 = 3
-# num_filters_conv1 = 32
 num_filters_conv1 = 32
 
 filter_size_conv2 = 3
@@ -96,7 +93,8 @@ def create_flatten_layer(layer):
     # But let's get it from the previous layer.
     layer_shape = layer.get_shape()
 
-    # Number of features will be img_height * img_width* num_channels. But we shall calculate it in place of hard-coding it.
+    # Number of features will be img_height * img_width* num_channels. But we shall calculate it in place of
+    # hard-coding it.
     num_features = layer_shape[1:4].num_elements()
 
     # Now, we Flatten the layer so we shall have to reshape to num_features
@@ -201,4 +199,4 @@ def train(num_iteration):
     total_iterations += num_iteration
 
 
-train(num_iteration=300)
+train(num_iteration=iterations)

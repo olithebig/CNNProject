@@ -2,13 +2,9 @@ import glob
 
 from PIL import Image
 
-# img = Image.open("2.jpg")
-# area = (1100, 0, 1920, 1080)
-# cropped_img = img.crop(area)
-# cropped_img.show()
-
 i = 0
 images = glob.glob("*.jpg")
+# Crops all images in directory, where it is executed
 for image in images:
     img = Image.open(image)
     area = (1050, 0, 1920, 1080)

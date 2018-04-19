@@ -2,24 +2,16 @@ import cv2
 import numpy as np
 import tensorflow as tf
 
-# First, pass the path of the image
-# dir_path = os.path.dirname(os.path.realpath(__file__))
-# image_path=sys.argv[1]
-filename = '6.jpg'
+# Image file of the glass
+filename = 'test_data/glass1/0.jpg'
 
-# crop image
-# img = Image.open(filename)
-# area = (1050, 0, 1920, 1080)
-# cropped_img = img.crop(area)
-# filename = "new.jpg"
-# cropped_img.save(filename)
 
 image_size = 128
 num_channels = 3
 images = []
 # Reading the image using OpenCV
 image = cv2.imread(filename)
-# Resizing the image to our desired size and preprocessing will be done exactly as done during training
+# Resizing the image to our desired size and pre-processing will be done exactly as done during training
 image = cv2.resize(image, (image_size, image_size), cv2.INTER_LINEAR)
 images.append(image)
 images = np.array(images, dtype=np.uint8)
@@ -37,7 +29,7 @@ saver.restore(sess, tf.train.latest_checkpoint('./'))
 
 # Accessing the default graph which we have restored
 graph = tf.get_default_graph()
-file_writer = tf.summary.FileWriter('/home/oliver/knime-workspace/Codeexample/', sess.graph)
+file_writer = tf.summary.FileWriter('', sess.graph)
 
 # Now, let's get hold of the op that we can be processed to get the output.
 # In the original network y_pred is the tensor that is the prediction of the network
@@ -57,8 +49,8 @@ result = sess.run(y_pred, feed_dict=feed_dict_testing)
 
 merged = tf.summary.merge_all()
 
-# result is of this format [probabiliy_of_rose probability_of_sunflower]
-# print(filename)
+# Results
+
 print(result)
 print(result[0][0])
 glass = result[0][1]

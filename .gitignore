@@ -1,3 +1,4 @@
 /glass-model.*
 /checkpoint
 /.idea/
+/events.out.tfevents.*
