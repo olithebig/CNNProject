@@ -12,7 +12,7 @@ batch_size = 5
 iterations = 300
 
 # Labels of training images
-classes = ['glass1', 'glass2', 'glass3', 'glass4', 'glass5', 'glass6']
+classes = ['clean', 'dirty']
 num_classes = len(classes)
 
 # 20% of the data will automatically be used for validation
