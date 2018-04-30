@@ -1,5 +1,4 @@
-/glass-model.*
-/checkpoint
-/.idea/
-/events.out.tfevents.*
+glass-model.*
+checkpoint
+events.out.tfevents.*
 .pyc
