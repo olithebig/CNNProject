@@ -3,7 +3,7 @@ import numpy as np
 import tensorflow as tf
 
 # Image file of the glass
-filename = 'test_data/glass1/0.jpg'
+filename = 'test_data/occupied/175.jpg'
 
 
 image_size = 128
@@ -38,7 +38,7 @@ y_pred = graph.get_tensor_by_name("y_pred:0")
 # Let's feed the images to the input placeholders
 x = graph.get_tensor_by_name("x:0")
 y_true = graph.get_tensor_by_name("y_true:0")
-y_test_images = np.zeros((1, 2))
+y_test_images = np.zeros((1, 3))
 
 image_shaped_input = tf.reshape(x, [1, 128, 128, 3])
 tf.summary.image('input', image_shaped_input, 10)

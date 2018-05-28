@@ -9,10 +9,10 @@ seed(1)
 set_random_seed(2)
 
 batch_size = 5
-iterations = 300
+iterations = 400
 
 # Labels of training images
-classes = ['clean', 'dirty']
+classes = ['clean', 'dirty', 'occupied']
 num_classes = len(classes)
 
 # 20% of the data will automatically be used for validation
