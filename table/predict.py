@@ -3,7 +3,7 @@ import numpy as np
 import tensorflow as tf
 
 # Image file of the glass
-filename = 'test_data/occupied/175.jpg'
+filename = 'test_data/occupied/176.jpg'
 
 
 image_size = 128
@@ -51,12 +51,8 @@ merged = tf.summary.merge_all()
 
 # Results
 
-print(result)
-print(result[0][0])
-glass = result[0][1]
-glass_is = 0.200
-if glass > 0.6:
-    glass_is = 0.275
-else:
-    glass_is = 0.200
-print(glass_is)
+classes = ['clean', 'dirty', 'occupied']
+
+for i in range(classes.__len__()):
+    print(classes[i])
+    print(result[0][i])

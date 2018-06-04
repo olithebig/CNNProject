@@ -7,8 +7,8 @@ from tensorflow import set_random_seed
 seed(1)
 set_random_seed(2)
 
-batch_size = 5
-iterations = 400
+batch_size = 10
+iterations = 500
 
 # Labels of training images
 classes = ['clean', 'dirty', 'occupied']
@@ -36,7 +36,7 @@ x = tf.placeholder(tf.float32, shape=[None, img_size, img_size, num_channels], n
 
 # labels
 y_true = tf.placeholder(tf.float32, shape=[None, num_classes], name='y_true')
-y_true_cls = tf.argmax(y_true, dimension=1)
+y_true_cls = tf.argmax(y_true, axis=1)
 
 # Network graph params
 filter_size_conv1 = 3
@@ -47,6 +47,9 @@ num_filters_conv2 = 32
 
 filter_size_conv3 = 3
 num_filters_conv3 = 64
+
+filter_size_conv4 = 3
+num_filters_conv4 = 64
 
 fc_layer_size = 128
 
@@ -133,7 +136,12 @@ layer_conv3 = create_convolutional_layer(input=layer_conv2,
                                          conv_filter_size=filter_size_conv3,
                                          num_filters=num_filters_conv3)
 
-layer_flat = create_flatten_layer(layer_conv3)
+layer_conv4 = create_convolutional_layer(input=layer_conv3,
+                                         num_input_channels=num_filters_conv3,
+                                         conv_filter_size=filter_size_conv4,
+                                         num_filters=num_filters_conv4)
+
+layer_flat = create_flatten_layer(layer_conv4)
 
 layer_fc1 = create_fc_layer(input=layer_flat,
                             num_inputs=layer_flat.get_shape()[1:4].num_elements(),
@@ -147,10 +155,10 @@ layer_fc2 = create_fc_layer(input=layer_fc1,
 
 y_pred = tf.nn.softmax(layer_fc2, name='y_pred')
 
-y_pred_cls = tf.argmax(y_pred, dimension=1)
+y_pred_cls = tf.argmax(y_pred, axis=1)
 session.run(tf.global_variables_initializer())
-cross_entropy = tf.nn.softmax_cross_entropy_with_logits(logits=layer_fc2,
-                                                        labels=y_true)
+cross_entropy = tf.nn.softmax_cross_entropy_with_logits_v2(logits=layer_fc2,
+                                                           labels=y_true)
 cost = tf.reduce_mean(cross_entropy)
 optimizer = tf.train.AdamOptimizer(learning_rate=1e-4).minimize(cost)
 correct_prediction = tf.equal(y_pred_cls, y_true_cls)
