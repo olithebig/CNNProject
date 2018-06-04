@@ -1,9 +1,8 @@
+import dataset
 import tensorflow as tf
 # Adding Seed so that random initialization is consistent
 from numpy.random import seed
 from tensorflow import set_random_seed
-
-import dataset
 
 seed(1)
 set_random_seed(2)
@@ -194,7 +193,7 @@ def train(num_iteration):
             epoch = int(i / int(data.train.num_examples / batch_size))
 
             show_progress(epoch, feed_dict_tr, feed_dict_val, val_loss)
-            saver.save(session, './glass-model')
+            saver.save(session, './table-model')
 
     total_iterations += num_iteration
 
