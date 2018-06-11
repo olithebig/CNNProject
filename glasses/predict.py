@@ -3,7 +3,7 @@ import numpy as np
 import tensorflow as tf
 
 # Image file of the glass
-filename = 'test_data/glass1/0.jpg'
+filename = 'training_data/glass4/0.jpg'
 
 
 image_size = 128
@@ -50,13 +50,16 @@ result = sess.run(y_pred, feed_dict=feed_dict_testing)
 merged = tf.summary.merge_all()
 
 # Results
+glass_sizes = [0.25 , 0.2, 0.1, 0.25, 0.15 , 0.17 ]
+index = 0
+propability = 0
+for i in range (0 , glass_sizes.__len__()):
+	if (result[0][i]>propability):
+		propability = result[0][i]
+		index = i
 
-print(result)
-print(result[0][0])
-glass = result[0][1]
-glass_is = 0.200
-if glass > 0.6:
-    glass_is = 0.275
-else:
-    glass_is = 0.200
-print(glass_is)
+
+return glass_sizes[index]
+ 	
+
+
