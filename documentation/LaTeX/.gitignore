@@ -1,0 +1,8 @@
+# ignore everything..
+*
+
+# ...but that
+!.gitignore
+!*.tex
+!content/*.tex
+!content/pictures/*
