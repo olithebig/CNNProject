@@ -4,5 +4,7 @@
 # ...but that
 !.gitignore
 !*.tex
+!content
 !content/*.tex
+!content/pictures
 !content/pictures/*
