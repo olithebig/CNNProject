@@ -8,3 +8,4 @@
 !content/*.tex
 !content/pictures
 !content/pictures/*
+!*.pdf

@@ -39,3 +39,17 @@ Zum Schluss haben wir mit Weiß-, Rosé-, und Rotwein jeweils 50 Bilder auf-geno
 	\caption{Auszug aus den zugeschnittenen Trainingsdaten zur Verschmutzungserkennung (a) sauber, (b) verschmutzt und (c) besetzt}
 	\label{fig:trainingsdaten_schmutz}
 \end{figure}
+
+\subsection{\ac{CNN}-Architektur}
+Identisch zur Glaserkennung wird als Eingabe für das \ac{CNN} wir ein 3 Channel 128x128 Bild verwendet. 
+Für die convolution Operationen setzen wir jedoch vier convolutional layer ein, um aus den schwerer zu unterscheidenden Bildern detailliertere Features herauszufiltern.
+Dabei bestehen die ersten beiden layer aus 32, die anderen beiden layer aus 64 3*3 Filtern. 
+
+Zur Erkennung sind gleich wie bei der Glaserkennung zwei FC-layer, die erste mit 128 Neuronen, die zweite mit 3 im Einsatz. Daraus ergibt sich die in Abbildung \ref{fig:table_structure} gezeigte Struktur des \ac{CNN}
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=0.7\linewidth]{content/pictures/table_structure}
+	\caption{Struktur des \ac{CNN} zur Schmutzerkennung}
+	\label{fig:table_structure}
+\end{figure}

@@ -32,9 +32,24 @@ Bevor wir das \ac{CNN} mit diesen Daten trainieren konnten mussten wir die Bilde
 
 Damit hat sich die Anzahl der klassifizierbaren Gläser auf insgesamt sechs erhöht. Deshalb mussten wir im Predict-Script die Dimension des Output-Tensors an die neue Anzahl der Klassen entsprechend anpassen.
 
-\begin{figure}
+\begin{figure}[!h]
 	\centering
 	\fbox{\includegraphics[width=0.7\linewidth,angle=90]{content/pictures/vergleich_glas_zuschnitt}}
 	\caption{Foto vor (a) und nach (b) dem Zuschneiden}
 	\label{fig:vergleich_glas_zuschnitt}
+\end{figure}
+\clearpage
+
+\subsection{\ac{CNN}-Architektur}
+Als Eingabe für das \ac{CNN} verwenden wir ein 3 Channel 128x128 Bild. 
+Für die convolution Operationen setzen wir drei convolutional layer ein, wobei die ersten beiden aus 32 und die dritte layer aus 64 Filtern besteht. 
+Dabei werden gängige 3*3 Filter verwendet.
+
+Die tatsächliche Erkennung der Gläser übernehmen zwei FC-layer, die erste mit 128 Neuronen, die zweite mit 6 an die Anzahl der Gläser angepasst. Daraus ergibt sich die in Abbildung \ref{fig:glass_structure} gezeigte Struktur des \ac{CNN}
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=0.7\linewidth]{content/pictures/glass_structure}
+	\caption{Struktur des \ac{CNN} zur Glaserkennung}
+	\label{fig:glass_structure}
 \end{figure}
